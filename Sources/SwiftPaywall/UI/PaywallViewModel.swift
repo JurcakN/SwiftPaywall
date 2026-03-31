@@ -17,9 +17,22 @@ public final class PaywallViewModel: ObservableObject {
     @Published public var isLoading: Bool = false
     @Published public var products: [PaywallProduct] = []
     @Published public var error: PaywallError? = nil
+    @Published public var selectedProduct: PaywallProduct? = nil
+    @Published public var showPrivacySheet: Bool = false
+    @Published public var showTermsSheet: Bool = false
+    @Published public var privacySheetContent: AnyView? = nil
+    @Published public var termsSheetContent: AnyView? = nil
     
     private let manager: PaywallManager
     public let configuration: PaywallConfiguration
+    
+    public var theme: PaywallTheme {
+        configuration.theme
+    }
+    
+    public var copy: PaywallCopy {
+        configuration.copy
+    }
     
     public init(manager: PaywallManager, configuration: PaywallConfiguration) {
         self.manager = manager
@@ -51,7 +64,7 @@ public final class PaywallViewModel: ObservableObject {
             UIApplication.shared.open(url)
             #endif
         case .sheet(let view):
-            privacySheetContent = view
+            privacySheetContent = AnyView(view)
             showPrivacySheet = true
         case .none:
             break
@@ -65,7 +78,7 @@ public final class PaywallViewModel: ObservableObject {
             UIApplication.shared.open(url)
             #endif
         case .sheet(let view):
-            termsSheetContent = view
+            termsSheetContent = AnyView(view)
             showTermsSheet = true
         case .none:
             break
