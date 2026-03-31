@@ -36,7 +36,7 @@ public final class PaywallViewModel: ObservableObject {
 
     public func purchase() async {
         guard let selected = selectedProduct else { return }
-        await manager.purchase(selected.product)
+        await manager.purchase(selected)
     }
 
     public func restore() async {

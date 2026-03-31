@@ -63,22 +63,23 @@ public final class PaywallManager: ObservableObject, Sendable {
     
     // MARK: - Purchase
     
-    public func purchase(_ product: Product) async {
+    public func purchase(_ paywallProduct: PaywallProduct) async {
         isLoading = true
         defer { isLoading = false }
         
         do {
-            let result = try await product.purchase()
+            let result = try await paywallProduct.product.purchase()
             
             switch result {
             case .success(let verification):
                 await handle(transactionResult: verification)
             case .pending:
                 self.error = .purchasePending
+                isLoading = false
             case .userCancelled:
-                break // do nothing, user chose to cancel
+                isLoading = false 
             @unknown default:
-                break
+                isLoading = false
             }
         } catch {
             self.error = .purchaseFailed(error)
