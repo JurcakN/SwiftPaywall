@@ -40,4 +40,60 @@ public struct PaywallCopy: Sendable {
         self.pendingText = pendingText
         self.annualBadgeText = annualBadgeText
     }
+    
+    // MARK: - Builder-style customization
+    
+    public func withTitle(_ title: String) -> PaywallCopy {
+        var copy = self
+        copy.title = title
+        return copy
+    }
+    
+    public func withSubtitle(_ subtitle: String) -> PaywallCopy {
+        var copy = self
+        copy.subtitle = subtitle
+        return copy
+    }
+    
+    public func withCtaText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.ctaText = text
+        return copy
+    }
+    
+    public func withRestoreText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.restoreText = text
+        return copy
+    }
+    
+    public func withCancelText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.cancelText = text
+        return copy
+    }
+    
+    public func withPrivacyText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.privacyText = text
+        return copy
+    }
+    
+    public func withTermsText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.termsText = text
+        return copy
+    }
+    
+    public func withPendingText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.pendingText = text
+        return copy
+    }
+    
+    public func withAnnualBadgeText(_ text: String) -> PaywallCopy {
+        var copy = self
+        copy.annualBadgeText = text
+        return copy
+    }
 }

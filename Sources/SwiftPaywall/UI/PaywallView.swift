@@ -53,7 +53,6 @@ public struct PaywallView: View {
                                 }
                             }
                         }
-                        .padding(.horizontal, 24)
                     }
                     
                     // Error
@@ -80,10 +79,9 @@ public struct PaywallView: View {
                             }
                         }
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 18)
+                        .frame(height: 50)
                         .background(viewModel.theme.accentColor)
                         .clipShape(RoundedRectangle(cornerRadius: viewModel.theme.cornerRadius))
-                        .padding(.horizontal, 24)
                     }
                     .disabled(viewModel.isLoading || viewModel.selectedProduct == nil)
                     
@@ -99,6 +97,7 @@ public struct PaywallView: View {
                         onTermsTap: { viewModel.handleTermsTap() }
                     )
                 }
+                .padding(.horizontal)
             }
         }
         .sheet(isPresented: $viewModel.showPrivacySheet) {

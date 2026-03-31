@@ -28,4 +28,42 @@ public struct PaywallConfiguration: Sendable {
         self.privacyPolicy = privacyPolicy
         self.terms = terms
     }
+    
+    // MARK: - Builder-style customization
+    
+    public func withTheme(_ theme: PaywallTheme) -> PaywallConfiguration {
+        var config = self
+        config.theme = theme
+        return config
+    }
+    
+    public func withCopy(_ copy: PaywallCopy) -> PaywallConfiguration {
+        var config = self
+        config.copy = copy
+        return config
+    }
+    
+    public func withPrivacyPolicy(_ policy: LegalLinkDestination) -> PaywallConfiguration {
+        var config = self
+        config.privacyPolicy = policy
+        return config
+    }
+    
+    public func withPrivacyPolicyURL(_ url: URL) -> PaywallConfiguration {
+        var config = self
+        config.privacyPolicy = .url(url)
+        return config
+    }
+    
+    public func withTerms(_ terms: LegalLinkDestination) -> PaywallConfiguration {
+        var config = self
+        config.terms = terms
+        return config
+    }
+    
+    public func withTermsURL(_ url: URL) -> PaywallConfiguration {
+        var config = self
+        config.terms = .url(url)
+        return config
+    }
 }
