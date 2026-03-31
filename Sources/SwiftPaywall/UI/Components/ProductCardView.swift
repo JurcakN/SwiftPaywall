@@ -70,9 +70,9 @@ struct ProductCardView: View {
         .padding(.horizontal)
         .frame(height: 75)
         .frame(maxWidth: .infinity)
-        .background(Color.secondary.opacity(0.25), in: RoundedRectangle(cornerRadius: 24))
+        .background(theme.backgroundColor, in: RoundedRectangle(cornerRadius: theme.cornerRadius))
         .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
+            RoundedRectangle(cornerRadius: theme.cornerRadius, style: .continuous)
                 .stroke(theme.accentColor.gradient, lineWidth: 2)
                 .opacity(isSelected ? 1 : 0)
         )

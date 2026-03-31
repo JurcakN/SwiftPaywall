@@ -51,48 +51,4 @@ public struct PaywallTheme: Sendable {
             ctaTextColor: .white
         )
     }
-    
-    // MARK: - Builder-style customization
-    
-    public func withAccentColor(_ color: Color) -> PaywallTheme {
-        var theme = self
-        theme.accentColor = color
-        return theme
-    }
-    
-    public func withBackgroundColor(_ color: Color) -> PaywallTheme {
-        var theme = self
-        theme.backgroundColor = color
-        return theme
-    }
-    
-    public func withPrimaryTextColor(_ color: Color) -> PaywallTheme {
-        var theme = self
-        theme.primaryTextColor = color
-        return theme
-    }
-    
-    public func withSecondaryTextColor(_ color: Color) -> PaywallTheme {
-        var theme = self
-        theme.secondaryTextColor = color
-        return theme
-    }
-    
-    public func withCardBackgroundColor(_ color: Color) -> PaywallTheme {
-        var theme = self
-        theme.cardBackgroundColor = color
-        return theme
-    }
-    
-    public func withCtaTextColor(_ color: Color) -> PaywallTheme {
-        var theme = self
-        theme.ctaTextColor = color
-        return theme
-    }
-    
-    public func withCornerRadius(_ radius: CGFloat) -> PaywallTheme {
-        var theme = self
-        theme.cornerRadius = radius
-        return theme
-    }
 }
