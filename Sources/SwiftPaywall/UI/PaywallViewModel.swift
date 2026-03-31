@@ -12,26 +12,23 @@ import SwiftUI
 
 @MainActor
 public final class PaywallViewModel: ObservableObject {
-
-    @Published public var selectedProduct: PaywallProduct?
-    @Published public var showPrivacySheet: Bool = false
-    @Published public var showTermsSheet: Bool = false
-    @Published public var privacySheetContent: AnyView? = nil
-    @Published public var termsSheetContent: AnyView? = nil
-
+    // ... existing @Published properties ...
+    
+    @Published public var isLoading: Bool = false
+    @Published public var products: [PaywallProduct] = []
+    @Published public var error: PaywallError? = nil
+    
     private let manager: PaywallManager
     public let configuration: PaywallConfiguration
-
-    // These now pass through @Published from manager correctly
-    public var products: [PaywallProduct] { manager.products }
-    public var isLoading: Bool { manager.isLoading }
-    public var error: PaywallError? { manager.error }
-    public var theme: PaywallTheme { configuration.theme }
-    public var copy: PaywallCopy { configuration.copy }
-
+    
     public init(manager: PaywallManager, configuration: PaywallConfiguration) {
         self.manager = manager
         self.configuration = configuration
+        
+        // Bind manager's published properties to view model
+        manager.$isLoading.assign(to: &$isLoading)
+        manager.$products.assign(to: &$products)
+        manager.$error.assign(to: &$error)
     }
 
     public func purchase() async {
