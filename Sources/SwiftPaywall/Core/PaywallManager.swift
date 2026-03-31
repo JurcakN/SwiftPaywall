@@ -75,11 +75,10 @@ public final class PaywallManager: ObservableObject, Sendable {
                 await handle(transactionResult: verification)
             case .pending:
                 self.error = .purchasePending
-                isLoading = false
             case .userCancelled:
-                isLoading = false 
+                break
             @unknown default:
-                isLoading = false
+                break
             }
         } catch {
             self.error = .purchaseFailed(error)
