@@ -24,15 +24,15 @@ public struct PaywallHeaderView: View {
                 .foregroundStyle(theme.accentColor)
             
             Text(copy.title)
-                .font(.system(size: 32, weight: .bold))
+                .font(.title)
                 .foregroundStyle(theme.primaryTextColor)
+                .multilineTextAlignment(.center)
             
             Text(copy.subtitle)
-                .font(.title3)
+                .font(.body)
                 .foregroundStyle(theme.secondaryTextColor)
                 .multilineTextAlignment(.center)
         }
         .padding(.top, 40)
-        .padding(.horizontal, 24)
     }
 }

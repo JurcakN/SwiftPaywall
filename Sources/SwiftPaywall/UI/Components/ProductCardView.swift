@@ -70,7 +70,7 @@ struct ProductCardView: View {
         .padding(.horizontal)
         .frame(height: 75)
         .frame(maxWidth: .infinity)
-        .background(theme.backgroundColor, in: RoundedRectangle(cornerRadius: theme.cornerRadius))
+        .background(theme.cardBackgroundColor, in: RoundedRectangle(cornerRadius: theme.cornerRadius))
         .overlay(
             RoundedRectangle(cornerRadius: theme.cornerRadius, style: .continuous)
                 .stroke(theme.accentColor.gradient, lineWidth: 2)
