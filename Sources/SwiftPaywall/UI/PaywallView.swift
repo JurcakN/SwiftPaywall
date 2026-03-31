@@ -41,13 +41,14 @@ public struct PaywallView: View {
                             .tint(viewModel.theme.accentColor)
                             .padding(.top, 40)
                     } else {
-                        VStack(spacing: 12) {
+                        VStack(spacing: 16) {
                             ForEach(viewModel.products) { product in
                                 ProductCardView(
                                     product: product,
                                     isSelected: viewModel.selectedProduct?.id == product.id,
                                     theme: viewModel.theme,
-                                    copy: viewModel.copy
+                                    copy: viewModel.copy,
+                                    badgeConfiguration: viewModel.configuration.badgeConfiguration
                                 ) {
                                     viewModel.selectProduct(product)
                                 }

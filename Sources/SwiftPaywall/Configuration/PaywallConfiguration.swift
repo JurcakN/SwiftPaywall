@@ -12,6 +12,7 @@ public struct PaywallConfiguration: Sendable {
     public var productIDs: [String]
     public var theme: PaywallTheme
     public var copy: PaywallCopy
+    public var badgeConfiguration: BadgeConfiguration
     public var privacyPolicy: LegalLinkDestination
     public var terms: LegalLinkDestination
     
@@ -19,12 +20,14 @@ public struct PaywallConfiguration: Sendable {
         productIDs: [String],
         theme: PaywallTheme = .dark,
         copy: PaywallCopy = PaywallCopy(),
+        badgeConfiguration: BadgeConfiguration = .annual,
         privacyPolicy: LegalLinkDestination = .none,
         terms: LegalLinkDestination = .none
     ) {
         self.productIDs = productIDs
         self.theme = theme
         self.copy = copy
+        self.badgeConfiguration = badgeConfiguration
         self.privacyPolicy = privacyPolicy
         self.terms = terms
     }
@@ -64,6 +67,12 @@ public struct PaywallConfiguration: Sendable {
     public func withTermsURL(_ url: URL) -> PaywallConfiguration {
         var config = self
         config.terms = .url(url)
+        return config
+    }
+    
+    public func withBadgeConfiguration(_ badgeConfig: BadgeConfiguration) -> PaywallConfiguration {
+        var config = self
+        config.badgeConfiguration = badgeConfig
         return config
     }
 }

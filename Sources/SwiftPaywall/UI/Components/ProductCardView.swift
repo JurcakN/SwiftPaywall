@@ -14,6 +14,7 @@ struct ProductCardView: View {
     let isSelected: Bool
     let theme: PaywallTheme
     let copy: PaywallCopy
+    let badgeConfiguration: BadgeConfiguration
     let onSelect: () -> Void
     
     //MARK: - INITIALIZATION
@@ -22,12 +23,14 @@ struct ProductCardView: View {
         isSelected: Bool,
         theme: PaywallTheme,
         copy: PaywallCopy,
+        badgeConfiguration: BadgeConfiguration,
         onSelect: @escaping () -> Void
     ) {
         self.product = product
         self.isSelected = isSelected
         self.theme = theme
         self.copy = copy
+        self.badgeConfiguration = badgeConfiguration
         self.onSelect = onSelect
     }
     
@@ -74,13 +77,15 @@ struct ProductCardView: View {
                 .opacity(isSelected ? 1 : 0)
         )
         .overlay(alignment: .topTrailing) {
-            Text(copy.annualBadgeText)
-                .font(.caption.bold())
-                .foregroundStyle(.white)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 4)
-                .background(theme.accentColor, in: Capsule())
-                .offset(x: -20, y: -10)
+            if let badgeText = badgeConfiguration.badgeText(for: product, defaultText: copy.annualBadgeText) {
+                Text(badgeText)
+                    .font(.caption.bold())
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 4)
+                    .background(theme.accentColor, in: Capsule())
+                    .offset(x: -20, y: -10)
+            }
         }
         .onTapGesture {
             onSelect()

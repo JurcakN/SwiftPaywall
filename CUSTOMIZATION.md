@@ -107,7 +107,7 @@ let customCopy = PaywallCopy()
 - `privacyText` - Privacy link text
 - `termsText` - Terms link text
 - `pendingText` - Pending purchase message
-- `annualBadgeText` - Badge on annual products
+- `annualBadgeText` - Default badge text (which products show it depends on badge configuration)
 
 ### 3. Legal Links
 
@@ -139,6 +139,103 @@ let config = PaywallConfiguration(
     privacyPolicy: .none,
     terms: .none
 )
+```
+
+## Badge Configuration
+
+Control which products display a badge and what text appears.
+
+### Default (Annual Only)
+
+```swift
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual"]
+    // Badge defaults to showing on annual products only
+)
+```
+
+### Badge on Specific Product Types
+
+```swift
+// Badge only on annual
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual"],
+    badgeConfiguration: .annual
+)
+
+// Badge only on monthly
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual"],
+    badgeConfiguration: .monthly
+)
+
+// Badge only on lifetime
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual", "lifetime"],
+    badgeConfiguration: .lifetime
+)
+
+// Badge on multiple types
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual", "lifetime"],
+    badgeConfiguration: .productTypes(.annual, .lifetime)
+)
+```
+
+### Badge on Specific Product IDs
+
+```swift
+// Badge on one specific product
+let config = PaywallConfiguration(
+    productIDs: ["com.app.monthly", "com.app.annual"],
+    badgeConfiguration: .productID("com.app.annual")
+)
+
+// Badge on multiple specific products
+let config = PaywallConfiguration(
+    productIDs: ["com.app.monthly", "com.app.annual", "com.app.lifetime"],
+    badgeConfiguration: .productIDs("com.app.annual", "com.app.lifetime")
+)
+```
+
+### No Badge
+
+```swift
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual"],
+    badgeConfiguration: .none
+)
+```
+
+### Custom Badge Logic
+
+```swift
+// Show different text based on product
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual", "lifetime"],
+    badgeConfiguration: .custom { product in
+        switch product.type {
+        case .annual:
+            return "Save 50%"
+        case .lifetime:
+            return "Best Deal"
+        case .monthly:
+            return "Popular"
+        default:
+            return nil
+        }
+    }
+)
+```
+
+### Builder Pattern for Badge
+
+```swift
+let config = PaywallConfiguration(
+    productIDs: ["monthly", "annual"]
+)
+.withBadgeConfiguration(.annual)
+.withCopy(PaywallCopy().withAnnualBadgeText("Best Value"))
 ```
 
 ## Complete Examples
